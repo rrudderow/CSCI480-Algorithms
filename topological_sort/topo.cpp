@@ -63,11 +63,12 @@ int main() {
     g.addEdge(1, 3);
     g.addEdge(3, 4);
     */
-    Graph g(10000); // Create a graph with 100 vertices
+    Graph g(10000); // Create a graph with 10,000 vertices
 
     // Define a list of edges
-    std::vector<std::pair<int, int>> edges;
+    vector<pair<int, int>> edges;
 
+    //Create 10,000 edge pairs
     for (int i = 0; i < 10000; ++i) {
         if (i + 1 < 1000) edges.emplace_back(i, i + 1); // Connect i to i + 1
         if (i + 2 < 1000) edges.emplace_back(i, i + 2); // Connect i to i + 2
@@ -76,15 +77,14 @@ int main() {
 
     // Add edges to the graph
     g.addEdges(edges);
+    //g.addEdge(3, 0);
 
-    if (g.isDAG()) {
-        std::cout << "The graph is a Directed Acyclic Graph (DAG)." << std::endl;
+    if (!g.isDAG()) {
+        cout << "The graph contains a cycle." << endl;
+        return 0;
     } else {
-        std::cout << "The graph contains a cycle." << std::endl;
+        cout << "The graph is a Directed Acyclic Graph (DAG)." << endl;
     }
-
-    // Uncomment to create a cycle
-    // g.addEdge(2, 0);
 
     return 0;
 }
