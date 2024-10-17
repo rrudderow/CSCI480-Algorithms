@@ -55,14 +55,7 @@ public:
 };
 
 int main() {
-    /*
-    Graph g(5);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(1, 3);
-    g.addEdge(3, 4);
-    */
+
     Graph g(10000); // Create a graph with 10,000 vertices
 
     // Define a list of edges
@@ -77,6 +70,8 @@ int main() {
 
     // Add edges to the graph
     g.addEdges(edges);
+
+    //To make the graph a cycle:
     //g.addEdge(3, 0);
 
     if (!g.isDAG()) {
