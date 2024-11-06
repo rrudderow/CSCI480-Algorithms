@@ -64,7 +64,7 @@ public:
         for (int i = 0; i < vertices; i++) {
             if (!visited[i]) {
                 if (dfs(i, visited, recStack, topologicalOrder)) {
-                    throw runtime_error("Graph is not a DAG, cannot perform topological sort.");
+                    throw runtime_error("Cannot perform topological sort.");
                 }
             }
         }
@@ -77,28 +77,36 @@ public:
 
         return result;
     }
+    void printTopo(vector<int> topoOrder){
+        cout << "Topological Sort Order: ";
+        for (int vertex : topoOrder) {
+            cout << vertex << " ";
+        }
+        cout << endl;
+    }
 };
 
 int main() {
-    Graph g(1000); // Create a graph with 1000 vertices
+    Graph g(10000); // Create a graph with 1000 vertices
 
     // Define a list of edges
     vector<pair<int, int>> edges;
 
     // Create edge pairs
-    for (int i = 0; i < 1000; ++i) {
-        if (i + 1 < 1000) edges.emplace_back(i, i + 1); // Connect i to i + 1
-        if (i + 2 < 1000) edges.emplace_back(i, i + 2); // Connect i to i + 2
-        if (i + 3 < 1000) edges.emplace_back(i, i + 3); // Connect i to i + 3
+
+    for (int i = 0; i < 10000; ++i) {
+        if (i + 1 < 10000) edges.emplace_back(i, i + 1); // Connect i to i + 1
+        if (i + 2 < 10000) edges.emplace_back(i, i + 2); // Connect i to i + 2
+        if (i + 3 < 10000) edges.emplace_back(i, i + 3); // Connect i to i + 3
     }
 
     // Add edges to the graph
     g.addEdges(edges);
-    //g.addEdge(3, 0);
+    //g.addEdge(1, 0);
 
     if (!g.isDAG()) {
         cout << "The graph contains a cycle." << endl;
-        //return 1;
+        return 1;
     } else {
         cout << "The graph is a Directed Acyclic Graph (DAG)." << endl;
     }
@@ -106,11 +114,8 @@ int main() {
     // Perform topological sort
     try {
         vector<int> topoOrder = g.topologicalSort();
-        cout << "Topological Sort Order: ";
-        for (int vertex : topoOrder) {
-            cout << vertex << " ";
-        }
-        cout << endl;
+        cout << "Topological Sort has finished\n";
+        //g.printTopo(topoOrder);
     } catch (const runtime_error& e) {
         cout << e.what() << endl;
     }
