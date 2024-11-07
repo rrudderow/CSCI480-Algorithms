@@ -18,12 +18,13 @@ class Graph {
                 if (!visited[neighbor] && dfs(neighbor, visited, recStack, topologicalOrder)) {
                     return true;
                 } else if (recStack[neighbor]) {
-                    return true; // Cycle detected
+                    cout << "Cycle detected: " << v << " -> " << neighbor << endl;
+                    return true;
                 }
             }
         }
-        recStack[v] = false; // Remove vertex from recursion stack
-        topologicalOrder.push(v); // Push to topological order
+        recStack[v] = false;
+        topologicalOrder.push(v);
         return false;
     }
 
@@ -148,6 +149,7 @@ int main() {
     t.addEdge(6, 0);
     t.addEdge(6, 4);
 
+    // To make a cycle:
     //t.addEdge(1, 0);
 
     try {
